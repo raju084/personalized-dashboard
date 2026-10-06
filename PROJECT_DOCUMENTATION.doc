@@ -1,0 +1,252 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="utf-8">
+<title>Personalized Content Dashboard - Technical Documentation</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Calibri, Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #1e293b;
+    margin: 40px;
+  }
+  h1 {
+    font-size: 24pt;
+    color: #4f46e5;
+    border-bottom: 2px solid #6366f1;
+    padding-bottom: 8px;
+    margin-top: 20px;
+  }
+  h2 {
+    font-size: 16pt;
+    color: #1e1b4b;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 4px;
+    margin-top: 24px;
+  }
+  h3 {
+    font-size: 13pt;
+    color: #4338ca;
+    margin-top: 18px;
+  }
+  p, li {
+    font-size: 11pt;
+    color: #334155;
+  }
+  code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    background-color: #f1f5f9;
+    color: #0f172a;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10pt;
+  }
+  pre {
+    background-color: #0f172a;
+    color: #f8fafc;
+    padding: 14px;
+    border-radius: 8px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 9.5pt;
+    overflow-x: auto;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  th {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: bold;
+  }
+  .badge {
+    display: inline-block;
+    background-color: #e0e7ff;
+    color: #4338ca;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 9pt;
+    font-weight: bold;
+  }
+  .box {
+    background-color: #f8fafc;
+    border-left: 4px solid #4f46e5;
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+
+<h1>🚀 Pulse | Personalized Content Dashboard</h1>
+<p><strong>Software Development Engineer (SDE) Intern — Frontend Development Assignment Documentation</strong></p>
+
+<div class="box">
+  <p><strong>Project Name:</strong> Pulse - Personalized Content Dashboard<br>
+  <strong>Technology Stack:</strong> Next.js 14 (App Router), React 18, TypeScript, Redux Toolkit, Tailwind CSS, Framer Motion, Vitest, Cypress<br>
+  <strong>Developer:</strong> Frontend Engineering SDE Candidate</p>
+</div>
+
+<hr>
+
+<h2>1. Executive Summary & Overview</h2>
+<p>The <strong>Personalized Content Dashboard</strong> is a high-performance web application designed for users to track, interact with, and organize real-time content across multiple domains (Technology, Finance, Sports, Entertainment, Science, Health, Gaming). The application consolidates news articles, movie/music recommendations, and social media posts into a single interactive feed.</p>
+
+<p>Key highlights include:</p>
+<ul>
+  <li><strong>State Management:</strong> Centralized Redux Toolkit store managing asynchronous thunks, user preferences, bookmarking, and local persistence.</li>
+  <li><strong>Interactive UI/UX:</strong> Framer Motion drag-and-drop feed reordering, dark/light theme switching, and smooth modal media reader.</li>
+  <li><strong>API Integration:</strong> Hybrid fetcher supporting live <code>NewsAPI</code> queries with keyless fallback mock generators.</li>
+  <li><strong>Performance & Search:</strong> 300ms debounced search bar with instant cross-category search and grid/list view mode switching.</li>
+  <li><strong>Testing Best Practices:</strong> Vitest unit test suite (100% passing) and Cypress E2E test specs.</li>
+</ul>
+
+<hr>
+
+<h2>2. System Architecture & Component Hierarchy</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Layer / Component</th>
+      <th>File Location</th>
+      <th>Function & Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Root Layout</strong></td>
+      <td><code>src/app/layout.tsx</code></td>
+      <td>Next.js 14 root HTML structure, font definitions, and Redux Provider wrapper.</td>
+    </tr>
+    <tr>
+      <td><strong>Main Dashboard</strong></td>
+      <td><code>src/app/page.tsx</code></td>
+      <td>Unified Personalized Content Feed page with sidebar, header, and content modals.</td>
+    </tr>
+    <tr>
+      <td><strong>Trending Section</strong></td>
+      <td><code>src/app/trending/page.tsx</code></td>
+      <td>Displays top viral stories and high-engagement items across categories.</td>
+    </tr>
+    <tr>
+      <td><strong>Favorites Section</strong></td>
+      <td><code>src/app/favorites/page.tsx</code></td>
+      <td>Displays bookmarked articles stored persistently in Redux + localStorage.</td>
+    </tr>
+    <tr>
+      <td><strong>Content Analytics</strong></td>
+      <td><code>src/app/analytics/page.tsx</code></td>
+      <td>Content insights dashboard with real-time stream status and category breakdown.</td>
+    </tr>
+    <tr>
+      <td><strong>Redux Store</strong></td>
+      <td><code>src/store/index.ts</code></td>
+      <td>Central Redux store configuration combining feed, preferences, favorites, and auth.</td>
+    </tr>
+    <tr>
+      <td><strong>Feed Reducer</strong></td>
+      <td><code>src/store/feedSlice.ts</code></td>
+      <td>Manages feed items, async thunks, drag-and-drop reordering, and search state.</td>
+    </tr>
+    <tr>
+      <td><strong>Preferences Reducer</strong></td>
+      <td><code>src/store/preferencesSlice.ts</code></td>
+      <td>Manages category filters, dark mode, i18n language, and API keys with localStorage.</td>
+    </tr>
+    <tr>
+      <td><strong>Content Feed UI</strong></td>
+      <td><code>src/components/feed/ContentFeed.tsx</code></td>
+      <td>Reorderable feed grid/list built with Framer Motion <code>Reorder</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Debounced Search</strong></td>
+      <td><code>src/components/search/SearchBar.tsx</code></td>
+      <td>300ms debounced search input component.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>3. Detailed Feature Breakdown</h2>
+
+<h3>3.1 Category Preferences & Persistent Settings</h3>
+<p>Users can select their preferred content categories (e.g., <i>Technology, Finance, Sports</i>) via the sidebar or Settings modal. Preferences automatically save to <code>localStorage</code> and sync across browser sessions.</p>
+
+<h3>3.2 Interactive Cards & Media Previews</h3>
+<ul>
+  <li><strong>News Cards:</strong> Reading time indicator, source badge, external article links.</li>
+  <li><strong>Recommendation Cards:</strong> Interactive video trailer preview modal and audio stream controls.</li>
+  <li><strong>Social Cards:</strong> User handles, verified badges, like button counter, and discussion thread simulator.</li>
+</ul>
+
+<h3>3.3 Drag-and-Drop Feed Organization</h3>
+<p>Each card contains an accessible drag handle. Using Framer Motion's <code>Reorder.Group</code> and <code>Reorder.Item</code>, users can reorder their content feed in real time without screen flickers.</p>
+
+<h3>3.4 Real-Time Live Feed Simulator (WebSocket/SSE)</h3>
+<p>A background WebSocket feed simulator streams live breaking updates every 12 seconds when enabled in Settings, triggering animated toast notifications and updating the unread notification badge.</p>
+
+<h3>3.5 Multi-Language Internationalization (i18n)</h3>
+<p>Includes built-in dictionary support for four languages: <strong>English (en)</strong>, <strong>Spanish (es)</strong>, <strong>French (fr)</strong>, and <strong>German (de)</strong>.</p>
+
+<hr>
+
+<h2>4. State Management (Redux Toolkit)</h2>
+
+<pre>
+store/
+├── index.ts              # Configures root store and typed hooks (useAppDispatch, useAppSelector)
+├── feedSlice.ts          # Manages item arrays, async status, active filters, search query & reordering
+├── preferencesSlice.ts   # Manages categories, dark theme, view mode, language, & API keys
+├── favoritesSlice.ts     # Manages bookmarked items and IDs persisted to localStorage
+└── authSlice.ts          # Manages user profile information and mock authentication state
+</pre>
+
+<hr>
+
+<h2>5. Testing Strategy & Results</h2>
+
+<h3>5.1 Unit Testing (Vitest)</h3>
+<p>Unit tests verify Redux slice reducers and state transitions under <code>src/test/</code>:</p>
+<ul>
+  <li><code>preferencesSlice.test.ts</code>: Tests category toggling, theme changes, view mode switching, and language updates.</li>
+  <li><code>feedSlice.test.ts</code>: Tests search query setting, content-type filtering, card reordering, and real-time item prepending.</li>
+</ul>
+<p><strong>Result:</strong> <code>8 passed (8)</code> across 2 test files.</p>
+
+<h3>5.2 End-to-End Testing (Cypress)</h3>
+<p>Cypress E2E specs in <code>cypress/e2e/dashboard.cy.ts</code> test search debouncing, card bookmarking, settings drawer, and page routing.</p>
+
+<hr>
+
+<h2>6. Instructions to Run & Verify</h2>
+
+<pre>
+# 1. Install dependencies
+npm install
+
+# 2. Start local development server
+npm run dev
+# App opens at http://localhost:3000
+
+# 3. Execute Vitest Unit Tests
+npm run test
+
+# 4. Production Build Verification
+npm run build
+npm run start
+</pre>
+
+<hr>
+<p align="center"><i>Documentation compiled successfully. File saved as PROJECT_DOCUMENTATION.doc</i></p>
+
+</body>
+</html>
